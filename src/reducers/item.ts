@@ -1,4 +1,5 @@
 import { Action, ActionType, Item, ItemsState } from "../model/model";
+import _ from "underscore";
 import createReducer from "./createReducer";
 
 const initialState = {
@@ -12,29 +13,47 @@ export const itemsState = createReducer<ItemsState>(initialState, {
 		return { ...state, items };
 	},
 
-	[ActionType.LABEL_ITEM](state: ItemsState, action: Action<number>) {
+	[ActionType.LABEL_ITEM](state: ItemsState, action: Action<string>) {
 		// search after project item with the given id and set completed to true
 		let items = state.items || [];
-		items = items.map(t =>
-			t.id === action.payload ? { ...t, completed: true } : t
-		);
+
+		console.log({ items, action });
+
+		items = items.map(item => {
+			console.log({ id: item.id, actionId: action.itemId });
+
+			if (item.id === action.itemId) {
+				console.log("matched!");
+
+				console.log({ labels: item.labels });
+				item.labels = _.union(item.labels, [action.payload]);
+			}
+			return item;
+		});
 		return { ...state, items };
 	},
 
-	[ActionType.UNLABEL_ITEM](state: ItemsState, action: Action<number>) {
+	[ActionType.UNLABEL_ITEM](state: ItemsState, action: Action<string>) {
 		// search after project item with the given id and set completed to false
 		let items = state.items || [];
-		items = items.map(t =>
-			t.id === action.payload ? { ...t, completed: false } : t
-		);
+
+		console.log({ items, action });
+
+		items = items.map(item => {
+			if (item.id === action.itemId) {
+				item.labels = _.difference(item.labels, [action.payload]);
+			}
+			return item;
+		});
 		return { ...state, items };
 	},
 
-	[ActionType.DELETE_ITEM](state: ItemsState, action: Action<number>) {
+	[ActionType.DELETE_ITEM](state: ItemsState, action: Action<string>) {
 		// remove all projects with the given id
 
 		let items = state.items || [];
-		items = items.filter(t => t.id !== action.payload);
+
+		items = items.filter(item => item.id !== action.itemId);
 		return { ...state, items };
 	},
 });

@@ -10,7 +10,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Route, RouteComponentProps, Router } from "react-router-dom";
 import { history } from "./configureStore";
-import { Item, ItemsState } from "./model/model";
+import { Item, ItemsState, hasLabel, LabelTypes } from "./model/model";
 import HomePage from "./pages/HomePage";
 import ProjectPage from "./pages/ProjectPage";
 import { RootState } from "./reducers/index";
@@ -130,8 +130,8 @@ const App = (props?: Props) => {
 };
 
 const ProjectIcon = (props: { itemsState: ItemsState }) => {
-	let uncompletedProjects = props.itemsState.items.filter(
-		t => t.completed === false
+	let uncompletedProjects = props.itemsState.items.filter(item =>
+		hasLabel(item, LabelTypes.COMPLETED)
 	);
 
 	if (uncompletedProjects.length > 0) {

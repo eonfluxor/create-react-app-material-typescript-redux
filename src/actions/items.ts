@@ -8,24 +8,30 @@ export const addItem = (item: Item): Action<Item> => {
 };
 
 // Async Function expample with redux-thunk
-export const labelItem = (itemId: number) => {
+export const labelItem = (itemId: string, label: string) => {
 	// here you could do API eg
 
 	return (dispatch: Function, getState: Function) => {
-		dispatch({ type: ActionType.LABEL_ITEM, payload: itemId });
+		dispatch({
+			type: ActionType.LABEL_ITEM,
+			itemId: itemId,
+			payload: label,
+		});
 	};
 };
 
-export const unlabelItem = (itemId: number): Action<number> => {
+export const unlabelItem = (itemId: string, label: string): Action<string> => {
 	return {
 		type: ActionType.UNLABEL_ITEM,
-		payload: itemId,
+		itemId: itemId,
+		payload: label,
 	};
 };
 
-export const deleteItem = (itemId: number): Action<number> => {
+export const deleteItem = (itemId: string): Action<any> => {
 	return {
 		type: ActionType.DELETE_ITEM,
-		payload: itemId,
+		itemId: itemId,
+		payload: undefined,
 	};
 };

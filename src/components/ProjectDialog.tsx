@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { useActions } from "../actions";
 import * as ItemActions from "../actions/items";
+import uuid from "uuid";
 
 interface Props {
 	open: boolean;
@@ -18,8 +19,7 @@ const ProjectDialog = (props: Props) => {
 
 	const handleClose = () => {
 		itemActions.addItem({
-			id: Math.random(),
-			completed: false,
+			id: uuid(),
 			text: newProjectText,
 		});
 		onClose();

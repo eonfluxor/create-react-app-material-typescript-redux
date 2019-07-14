@@ -6,7 +6,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../actions";
 import * as ItemActions from "../actions/items";
-import { Item } from "../model/model";
+import { Item, hasLabel, LabelTypes } from "../model/model";
 import { RootState } from "../reducers";
 
 interface Props {}
@@ -17,10 +17,11 @@ const ProjectTable = (props: Props) => {
 	const itemActions = useActions(ItemActions);
 
 	const onRowClick = (project: Item) => {
-		if (project.completed) {
-			itemActions.unlabelItem(project.id);
+		const completed = hasLabel(project, LabelTypes.COMPLETED);
+		if (completed) {
+			itemActions.unlabelItem(project.id, LabelTypes.COMPLETED);
 		} else {
-			itemActions.labelItem(project.id);
+			itemActions.labelItem(project.id, LabelTypes.COMPLETED);
 		}
 	};
 
@@ -35,23 +36,29 @@ const ProjectTable = (props: Props) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{itemsState.items.map((n: Item) => {
+					{itemsState.items.map((project: Item) => {
+						const completed = hasLabel(
+							project,
+							LabelTypes.COMPLETED
+						);
 						return (
 							<TableRow
-								key={n.id}
+								key={project.id}
 								hover
-								onClick={event => onRowClick(n)}
+								onClick={event => onRowClick(project)}
 							>
 								<TableCell padding="none">
-									<Checkbox checked={n.completed} />
+									<Checkbox checked={completed} />
 								</TableCell>
-								<TableCell padding="none">{n.text}</TableCell>
+								<TableCell padding="none">
+									{project.text}
+								</TableCell>
 								<TableCell padding="none">
 									<IconButton
 										aria-label="Delete"
 										color="default"
 										onClick={() =>
-											itemActions.deleteItem(n.id)
+											itemActions.deleteItem(project.id)
 										}
 									>
 										<DeleteIcon />
