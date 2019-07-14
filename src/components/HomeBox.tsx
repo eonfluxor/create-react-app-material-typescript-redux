@@ -6,7 +6,7 @@ interface Props {
 	color: "red" | "blue" | string;
 }
 
-function HomeBox(props: Props) {
+const HomeBox = (props: Props) => {
 	const { size, ...other } = props;
 
 	const classes = useStyles(props);
@@ -18,7 +18,7 @@ function HomeBox(props: Props) {
 			</Typography>
 		</Paper>
 	);
-}
+};
 
 const styledBy = (property: string, props: any, mapping: any): string =>
 	mapping[props[property]];
