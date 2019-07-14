@@ -10,7 +10,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Route, RouteComponentProps, Router } from "react-router-dom";
 import { history } from "./configureStore";
-import { Project } from "./model/model";
+import { Item } from "./model/model";
 import HomePage from "./pages/HomePage";
 import ProjectPage from "./pages/ProjectPage";
 import { RootState } from "./reducers/index";
@@ -28,7 +28,7 @@ const Routes = () => {
 	);
 };
 
-const Drawer = (props: { projectList: Project[] }) => {
+const Drawer = (props: { projectList: Item[] }) => {
 	const classes = useStyles();
 
 	return (
@@ -57,7 +57,7 @@ const Drawer = (props: { projectList: Project[] }) => {
 };
 
 interface Props extends RouteComponentProps<void>, WithWidth {
-	projectList: Project[];
+	projectList: Item[];
 }
 
 const App = (props?: Props) => {
@@ -129,7 +129,7 @@ const App = (props?: Props) => {
 	);
 };
 
-const ProjectIcon = (props: { projectList: Project[] }) => {
+const ProjectIcon = (props: { projectList: Item[] }) => {
 	let uncompletedProjects = props.projectList.filter(
 		t => t.completed === false
 	);

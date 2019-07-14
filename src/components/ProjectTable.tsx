@@ -5,8 +5,8 @@ import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../actions";
-import * as ProjectActions from "../actions/project";
-import { Project } from "../model/model";
+import * as ItemActions from "../actions/items";
+import { Item } from "../model/model";
 import { RootState } from "../reducers";
 
 interface Props {}
@@ -14,13 +14,13 @@ interface Props {}
 const ProjectTable = (props: Props) => {
 	const classes = useStyles();
 	const projectList = useSelector((state: RootState) => state.projectList);
-	const projectActions = useActions(ProjectActions);
+	const itemActions = useActions(ItemActions);
 
-	const onRowClick = (project: Project) => {
+	const onRowClick = (project: Item) => {
 		if (project.completed) {
-			projectActions.unlabelItem(project.id);
+			itemActions.unlabelItem(project.id);
 		} else {
-			projectActions.labelItem(project.id);
+			itemActions.labelItem(project.id);
 		}
 	};
 
@@ -35,7 +35,7 @@ const ProjectTable = (props: Props) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{projectList.map((n: Project) => {
+					{projectList.map((n: Item) => {
 						return (
 							<TableRow
 								key={n.id}
@@ -51,7 +51,7 @@ const ProjectTable = (props: Props) => {
 										aria-label="Delete"
 										color="default"
 										onClick={() =>
-											projectActions.deleteItem(n.id)
+											itemActions.deleteItem(n.id)
 										}
 									>
 										<DeleteIcon />

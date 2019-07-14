@@ -3,7 +3,7 @@ import { Button, Dialog, DialogActions, DialogTitle, TextField } from "@material
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { useActions } from "../actions";
-import * as ProjectActions from "../actions/project";
+import * as ItemActions from "../actions/items";
 
 interface Props {
 	open: boolean;
@@ -14,10 +14,10 @@ const ProjectDialog = (props: Props) => {
 	const { open, onClose } = props;
 	const classes = useStyles();
 	const [newProjectText, setNewProjectText] = React.useState("");
-	const projectActions = useActions(ProjectActions);
+	const itemActions = useActions(ItemActions);
 
 	const handleClose = () => {
-		projectActions.addItem({
+		itemActions.addItem({
 			id: Math.random(),
 			completed: false,
 			text: newProjectText,
