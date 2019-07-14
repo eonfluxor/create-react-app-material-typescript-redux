@@ -1,3 +1,7 @@
+export interface ItemsState {
+	items: Item[];
+}
+
 export interface Item {
 	id: number;
 	text: string;

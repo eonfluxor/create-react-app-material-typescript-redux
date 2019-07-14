@@ -10,7 +10,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Route, RouteComponentProps, Router } from "react-router-dom";
 import { history } from "./configureStore";
-import { Item } from "./model/model";
+import { Item, ItemsState } from "./model/model";
 import HomePage from "./pages/HomePage";
 import ProjectPage from "./pages/ProjectPage";
 import { RootState } from "./reducers/index";
@@ -28,7 +28,7 @@ const Routes = () => {
 	);
 };
 
-const Drawer = (props: { projectList: Item[] }) => {
+const Drawer = (props: { itemsState: ItemsState }) => {
 	const classes = useStyles();
 
 	return (
@@ -47,7 +47,7 @@ const Drawer = (props: { projectList: Item[] }) => {
 			<List>
 				<ListItem button onClick={() => history.push("/project")}>
 					<ListItemIcon>
-						<ProjectIcon projectList={props.projectList} />
+						<ProjectIcon itemsState={props.itemsState} />
 					</ListItemIcon>
 					<ListItemText primary="Project" />
 				</ListItem>
@@ -57,7 +57,7 @@ const Drawer = (props: { projectList: Item[] }) => {
 };
 
 interface Props extends RouteComponentProps<void>, WithWidth {
-	projectList: Item[];
+	itemsState: ItemsState;
 }
 
 const App = (props?: Props) => {
@@ -108,7 +108,7 @@ const App = (props?: Props) => {
 								keepMounted: true, // Better open performance on mobile.
 							}}
 						>
-							<Drawer projectList={props.projectList} />
+							<Drawer itemsState={props.itemsState} />
 						</DrawerMui>
 					</Hidden>
 					<Hidden smDown>
@@ -119,7 +119,7 @@ const App = (props?: Props) => {
 								paper: classes.drawerPaper,
 							}}
 						>
-							<Drawer projectList={props.projectList} />
+							<Drawer itemsState={props.itemsState} />
 						</DrawerMui>
 					</Hidden>
 					<Routes />
@@ -129,8 +129,8 @@ const App = (props?: Props) => {
 	);
 };
 
-const ProjectIcon = (props: { projectList: Item[] }) => {
-	let uncompletedProjects = props.projectList.filter(
+const ProjectIcon = (props: { itemsState: ItemsState }) => {
+	let uncompletedProjects = props.itemsState.items.filter(
 		t => t.completed === false
 	);
 
@@ -192,7 +192,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const mapStateToProps = (state: RootState) => {
 	return {
-		projectList: state.projectList,
+		itemsState: state.itemsState,
 	};
 };
 

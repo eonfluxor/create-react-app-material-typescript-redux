@@ -1,13 +1,13 @@
 import { History } from "history";
 import { combineReducers } from "redux";
-import { Item } from "../model/model";
-import * as projectReducer from "./project";
+import { Item, ItemsState } from "../model/model";
+import * as itemReducer from "./item";
 
 export interface RootState {
-	projectList: Item[];
+	itemsState: ItemsState;
 }
 
 export default (history: History) =>
 	combineReducers({
-		...projectReducer,
+		...itemReducer,
 	});

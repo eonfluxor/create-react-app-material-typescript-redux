@@ -13,7 +13,7 @@ interface Props {}
 
 const ProjectTable = (props: Props) => {
 	const classes = useStyles();
-	const projectList = useSelector((state: RootState) => state.projectList);
+	const itemsState = useSelector((state: RootState) => state.itemsState);
 	const itemActions = useActions(ItemActions);
 
 	const onRowClick = (project: Item) => {
@@ -35,7 +35,7 @@ const ProjectTable = (props: Props) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{projectList.map((n: Item) => {
+					{itemsState.items.map((n: Item) => {
 						return (
 							<TableRow
 								key={n.id}
