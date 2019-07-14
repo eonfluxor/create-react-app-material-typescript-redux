@@ -8,7 +8,7 @@ import { RootState } from "../reducers";
 
 interface Props extends RouteComponentProps<void> {}
 
-function HomePage(props: Props) {
+const HomePage = (props: Props) => {
 	const classes = useStyles();
 	const [boxColor, setBoxColor] = React.useState("red");
 	const projectList = useSelector((state: RootState) => state.projectList);
@@ -19,9 +19,9 @@ function HomePage(props: Props) {
 	return (
 		<div className={classes.root}>
 			<Typography variant="h4" gutterBottom>
-				You have {projectList.length} PROJECTs in your list!
+				You have {projectList.length} PROJECTS!
 			</Typography>
-			<div className={classes.centerContainer}>
+			{/* <div className={classes.centerContainer}>
 				<HomeBox size={300} color={boxColor} />
 				<Button
 					className={classes.button}
@@ -31,10 +31,10 @@ function HomePage(props: Props) {
 				>
 					Change Color
 				</Button>
-			</div>
+			</div> */}
 		</div>
 	);
-}
+};
 
 const useStyles = makeStyles({
 	root: {

@@ -16,7 +16,7 @@ import ProjectPage from "./pages/ProjectPage";
 import { RootState } from "./reducers/index";
 import withRoot from "./withRoot";
 
-function Routes() {
+const Routes = () => {
 	const classes = useStyles();
 
 	return (
@@ -26,9 +26,9 @@ function Routes() {
 			<Route exact={true} path="/project" component={ProjectPage} />
 		</div>
 	);
-}
+};
 
-function Drawer(props: { projectList: Project[] }) {
+const Drawer = (props: { projectList: Project[] }) => {
 	const classes = useStyles();
 
 	return (
@@ -54,13 +54,13 @@ function Drawer(props: { projectList: Project[] }) {
 			</List>
 		</div>
 	);
-}
+};
 
 interface Props extends RouteComponentProps<void>, WithWidth {
 	projectList: Project[];
 }
 
-function App(props?: Props) {
+const App = (props?: Props) => {
 	const classes = useStyles();
 	const [mobileOpen, setMobileOpen] = React.useState(true);
 
@@ -127,9 +127,9 @@ function App(props?: Props) {
 			</div>
 		</Router>
 	);
-}
+};
 
-function ProjectIcon(props: { projectList: Project[] }) {
+const ProjectIcon = (props: { projectList: Project[] }) => {
 	let uncompletedProjects = props.projectList.filter(
 		t => t.completed === false
 	);
@@ -143,7 +143,7 @@ function ProjectIcon(props: { projectList: Project[] }) {
 	} else {
 		return <FormatListNumberedIcon />;
 	}
-}
+};
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) => ({
@@ -190,10 +190,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 }));
 
-function mapStateToProps(state: RootState) {
+const mapStateToProps = (state: RootState) => {
 	return {
 		projectList: state.projectList,
 	};
-}
+};
 
 export default connect(mapStateToProps)(withRoot(withWidth()(App)));

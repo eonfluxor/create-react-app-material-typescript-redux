@@ -11,16 +11,16 @@ import { RootState } from "../reducers";
 
 interface Props {}
 
-function ProjectTable(props: Props) {
+const ProjectTable = (props: Props) => {
 	const classes = useStyles();
 	const projectList = useSelector((state: RootState) => state.projectList);
 	const projectActions = useActions(ProjectActions);
 
 	const onRowClick = (project: Project) => {
 		if (project.completed) {
-			projectActions.uncompleteProject(project.id);
+			projectActions.unlabelItem(project.id);
 		} else {
-			projectActions.completeProject(project.id);
+			projectActions.labelItem(project.id);
 		}
 	};
 
@@ -51,7 +51,7 @@ function ProjectTable(props: Props) {
 										aria-label="Delete"
 										color="default"
 										onClick={() =>
-											projectActions.deleteProject(n.id)
+											projectActions.deleteItem(n.id)
 										}
 									>
 										<DeleteIcon />
@@ -64,7 +64,7 @@ function ProjectTable(props: Props) {
 			</Table>
 		</Paper>
 	);
-}
+};
 
 const useStyles = makeStyles({
 	paper: {

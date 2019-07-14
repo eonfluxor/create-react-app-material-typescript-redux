@@ -1,31 +1,31 @@
 import { Action, ActionType, Project } from "../model/model";
 
-export function addProject(project: Project): Action<Project> {
+export const addItem = (project: Project): Action<Project> => {
 	return {
-		type: ActionType.ADD_PROJECT,
+		type: ActionType.ADD_ITEM,
 		payload: project,
 	};
-}
+};
 
 // Async Function expample with redux-thunk
-export function completeProject(projectId: number) {
+export const labelItem = (projectId: number) => {
 	// here you could do API eg
 
 	return (dispatch: Function, getState: Function) => {
-		dispatch({ type: ActionType.COMPLETE_PROJECT, payload: projectId });
+		dispatch({ type: ActionType.LABEL_ITEM, payload: projectId });
 	};
-}
+};
 
-export function uncompleteProject(projectId: number): Action<number> {
+export const unlabelItem = (projectId: number): Action<number> => {
 	return {
-		type: ActionType.UNCOMPLETE_PROJECT,
+		type: ActionType.UNLABEL_ITEM,
 		payload: projectId,
 	};
-}
+};
 
-export function deleteProject(projectId: number): Action<number> {
+export const deleteItem = (projectId: number): Action<number> => {
 	return {
-		type: ActionType.DELETE_PROJECT,
+		type: ActionType.DELETE_ITEM,
 		payload: projectId,
 	};
-}
+};

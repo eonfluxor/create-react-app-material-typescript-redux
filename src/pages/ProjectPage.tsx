@@ -8,7 +8,7 @@ import ProjectDialog from "../components/ProjectDialog";
 
 interface Props extends RouteComponentProps<void> {}
 
-function ProjectPage(props: Props) {
+const ProjectPage = (props: Props) => {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(false);
 
@@ -25,7 +25,7 @@ function ProjectPage(props: Props) {
 			<ProjectDialog open={open} onClose={handleClose} />
 			<Grid item xs={6}>
 				<Typography variant="h4" gutterBottom>
-					Project List
+					Projects
 				</Typography>
 			</Grid>
 			<Grid item xs={6}>
@@ -45,7 +45,7 @@ function ProjectPage(props: Props) {
 			</Grid>
 		</Grid>
 	);
-}
+};
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {

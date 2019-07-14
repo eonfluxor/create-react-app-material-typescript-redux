@@ -5,10 +5,10 @@ export interface Project {
 }
 
 export enum ActionType {
-	ADD_PROJECT,
-	DELETE_PROJECT,
-	COMPLETE_PROJECT,
-	UNCOMPLETE_PROJECT,
+	ADD_ITEM,
+	DELETE_ITEM,
+	LABEL_ITEM,
+	UNLABEL_ITEM,
 }
 
 export interface Action<T> {

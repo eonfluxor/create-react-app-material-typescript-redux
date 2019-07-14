@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 
-export function useActions(actions: any, deps?: any): any {
+export const useActions = (actions: any, deps?: any): any => {
 	const dispatch = useDispatch();
 	return useMemo(
 		() => {
@@ -13,4 +13,4 @@ export function useActions(actions: any, deps?: any): any {
 		},
 		deps ? [dispatch, ...deps] : deps
 	);
-}
+};

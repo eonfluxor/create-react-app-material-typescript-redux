@@ -22,8 +22,8 @@ const theme = createMuiTheme({
 	},
 });
 
-function withRoot(Component: any) {
-	function WithRoot(props: object) {
+const withRoot = (Component: any) => {
+	const WithRoot = (props: object) => {
 		// MuiThemeProvider makes the theme available down the React tree
 		// thanks to React context.
 		return (
@@ -33,9 +33,9 @@ function withRoot(Component: any) {
 				<Component {...props} />
 			</ThemeProvider>
 		);
-	}
+	};
 
 	return WithRoot;
-}
+};
 
 export default withRoot;

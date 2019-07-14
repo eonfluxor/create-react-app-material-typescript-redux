@@ -7,7 +7,7 @@ import configureStore from "./configureStore";
 
 const { persistor, store } = configureStore();
 
-function ReduxRoot() {
+const ReduxRoot = () => {
 	return (
 		<Provider store={store}>
 			<PersistGate
@@ -18,6 +18,6 @@ function ReduxRoot() {
 			</PersistGate>
 		</Provider>
 	);
-}
+};
 
 export default ReduxRoot;

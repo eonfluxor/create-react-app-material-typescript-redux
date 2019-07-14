@@ -10,14 +10,14 @@ interface Props {
 	onClose: () => void;
 }
 
-function ProjectDialog(props: Props) {
+const ProjectDialog = (props: Props) => {
 	const { open, onClose } = props;
 	const classes = useStyles();
 	const [newProjectText, setNewProjectText] = React.useState("");
 	const projectActions = useActions(ProjectActions);
 
 	const handleClose = () => {
-		projectActions.addProject({
+		projectActions.addItem({
 			id: Math.random(),
 			completed: false,
 			text: newProjectText,
@@ -49,7 +49,7 @@ function ProjectDialog(props: Props) {
 			</DialogActions>
 		</Dialog>
 	);
-}
+};
 
 const useStyles = makeStyles({
 	textField: {
