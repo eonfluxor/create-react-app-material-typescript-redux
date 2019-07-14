@@ -1,5 +1,5 @@
-import TodoTable from "./TodoTable";
+import ProjectTable from "./ProjectTable";
 
-export { TodoTable };
+export { ProjectTable };
 
-export default TodoTable;
+export default ProjectTable;

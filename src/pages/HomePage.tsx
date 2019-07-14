@@ -11,7 +11,7 @@ interface Props extends RouteComponentProps<void> {}
 function HomePage(props: Props) {
 	const classes = useStyles();
 	const [boxColor, setBoxColor] = React.useState("red");
-	const todoList = useSelector((state: RootState) => state.todoList);
+	const projectList = useSelector((state: RootState) => state.projectList);
 
 	const onButtonClick = () =>
 		setBoxColor(boxColor === "red" ? "blue" : "red");
@@ -19,7 +19,7 @@ function HomePage(props: Props) {
 	return (
 		<div className={classes.root}>
 			<Typography variant="h4" gutterBottom>
-				You have {todoList.length} TODOs in your list!
+				You have {projectList.length} PROJECTs in your list!
 			</Typography>
 			<div className={classes.centerContainer}>
 				<HomeBox size={300} color={boxColor} />

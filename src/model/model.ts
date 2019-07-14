@@ -1,18 +1,17 @@
-
-export interface Todo {
-    id: number;
-    text: string;
-    completed: boolean;
+export interface Project {
+	id: number;
+	text: string;
+	completed: boolean;
 }
 
 export enum ActionType {
-    ADD_TODO,
-    DELETE_TODO,
-    COMPLETE_TODO,
-    UNCOMPLETE_TODO,
+	ADD_PROJECT,
+	DELETE_PROJECT,
+	COMPLETE_PROJECT,
+	UNCOMPLETE_PROJECT,
 }
 
 export interface Action<T> {
-    type: ActionType;
-    payload: T;
+	type: ActionType;
+	payload: T;
 }

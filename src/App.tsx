@@ -10,9 +10,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Route, RouteComponentProps, Router } from "react-router-dom";
 import { history } from "./configureStore";
-import { Todo } from "./model/model";
+import { Project } from "./model/model";
 import HomePage from "./pages/HomePage";
-import TodoPage from "./pages/TodoPage";
+import ProjectPage from "./pages/ProjectPage";
 import { RootState } from "./reducers/index";
 import withRoot from "./withRoot";
 
@@ -23,12 +23,12 @@ function Routes() {
 		<div className={classes.content}>
 			<Route exact={true} path="/" component={HomePage} />
 			<Route exact={true} path="/home" component={HomePage} />
-			<Route exact={true} path="/todo" component={TodoPage} />
+			<Route exact={true} path="/project" component={ProjectPage} />
 		</div>
 	);
 }
 
-function Drawer(props: { todoList: Todo[] }) {
+function Drawer(props: { projectList: Project[] }) {
 	const classes = useStyles();
 
 	return (
@@ -45,11 +45,11 @@ function Drawer(props: { todoList: Todo[] }) {
 			</List>
 			<Divider />
 			<List>
-				<ListItem button onClick={() => history.push("/todo")}>
+				<ListItem button onClick={() => history.push("/project")}>
 					<ListItemIcon>
-						<TodoIcon todoList={props.todoList} />
+						<ProjectIcon projectList={props.projectList} />
 					</ListItemIcon>
-					<ListItemText primary="Todo" />
+					<ListItemText primary="Project" />
 				</ListItem>
 			</List>
 		</div>
@@ -57,7 +57,7 @@ function Drawer(props: { todoList: Todo[] }) {
 }
 
 interface Props extends RouteComponentProps<void>, WithWidth {
-	todoList: Todo[];
+	projectList: Project[];
 }
 
 function App(props?: Props) {
@@ -91,8 +91,7 @@ function App(props?: Props) {
 								color="inherit"
 								noWrap={isWidthUp("sm", props.width)}
 							>
-								Create-React-App with Material-UI, Typescript,
-								Redux and Routing
+								PHI
 							</Typography>
 						</Toolbar>
 					</AppBar>
@@ -109,7 +108,7 @@ function App(props?: Props) {
 								keepMounted: true, // Better open performance on mobile.
 							}}
 						>
-							<Drawer todoList={props.todoList} />
+							<Drawer projectList={props.projectList} />
 						</DrawerMui>
 					</Hidden>
 					<Hidden smDown>
@@ -120,7 +119,7 @@ function App(props?: Props) {
 								paper: classes.drawerPaper,
 							}}
 						>
-							<Drawer todoList={props.todoList} />
+							<Drawer projectList={props.projectList} />
 						</DrawerMui>
 					</Hidden>
 					<Routes />
@@ -130,12 +129,14 @@ function App(props?: Props) {
 	);
 }
 
-function TodoIcon(props: { todoList: Todo[] }) {
-	let uncompletedTodos = props.todoList.filter(t => t.completed === false);
+function ProjectIcon(props: { projectList: Project[] }) {
+	let uncompletedProjects = props.projectList.filter(
+		t => t.completed === false
+	);
 
-	if (uncompletedTodos.length > 0) {
+	if (uncompletedProjects.length > 0) {
 		return (
-			<Badge color="secondary" badgeContent={uncompletedTodos.length}>
+			<Badge color="secondary" badgeContent={uncompletedProjects.length}>
 				<FormatListNumberedIcon />
 			</Badge>
 		);
@@ -191,7 +192,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function mapStateToProps(state: RootState) {
 	return {
-		todoList: state.todoList,
+		projectList: state.projectList,
 	};
 }
 
